@@ -1,0 +1,121 @@
+﻿@model Iluminada.Web.Models.ClaseViewModel
+@{
+    ViewBag.Title = "Crear";
+}
+
+<div class="container">
+
+@*<div class="page-header">
+    <h1>Tables</h1>
+</div>*@
+
+<div class="row">
+@using (Html.BeginForm("Crear", "Clase", FormMethod.Post, new {@class = "form-horizontal"})) 
+{
+    <fieldset>
+        <legend>Datos Generales</legend>
+        <div class="form-group form-group-sm">
+            <label for="usuario" class="col-xs-1 control-label">Colegio</label>
+            <div class="col-xs-11">
+                <input class="form-control" id="usuario"/>
+            </div>
+        </div>
+        <div class="form-group form-group-sm">
+            <label for="area" class="col-xs-1 control-label">Profesor</label>
+            <div class="col-xs-11">
+                @Html.TextBoxFor(model => model.Clase.Profesor, new {@class = "form-control"})
+            </div>
+        </div>
+        <div class="form-group form-group-sm">
+            <label for="exampleInputPassword1" class="col-xs-1 control-label">Area</label>
+            <div class="col-xs-3">
+                @Html.DropDownListFor(model => model.Clase.AreaId, Model.Areas.Select(x => new SelectListItem { Text = x.Valor, Value = x.TablaId.ToString() }), "--Seleccionar--", new {@class = "form-control" })
+            </div>
+            <label for="exampleInputPassword1" class="col-xs-1 control-label">Nivel</label>
+            <div class="col-xs-3">
+                @Html.DropDownListFor(model => model.Clase.NivelId, Model.Niveles.Select(x => new SelectListItem { Text = x.Valor, Value = x.TablaId.ToString() }), "--Seleccionar--", new {@class = "form-control" })
+            </div>
+            <label for="exampleInputPassword1" class="col-xs-1 control-label">Grado</label>
+            <div class="col-xs-3">
+                @Html.DropDownListFor(model => model.Clase.GradoId, Model.Grados.Select(x => new SelectListItem { Text = x.Valor, Value = x.TablaId.ToString() }), "--Seleccionar--", new {@class = "form-control" })
+            </div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Diseño Sistémico de Luz y Verdad LyV</legend>
+        <div class="form-group form-group-sm">
+            <label for="exampleInputPassword1" class="col-xs-1 control-label">Competencia LyV</label>
+            <div class="col-xs-3">
+                @Html.DropDownListFor(model => model.Clase.CompetenciaId, Model.Competencias.Select(x => new SelectListItem { Text = x.Valor, Value = x.TablaId.ToString() }), "--Seleccionar--", new {@class = "form-control" })
+            </div>
+            <label for="exampleInputPassword1" class="col-xs-1 control-label">Capacidad LyV</label>
+            <div class="col-xs-3">
+                @Html.DropDownListFor(model => model.Clase.CapacidadId, Model.Capacidades.Select(x => new SelectListItem { Text = x.Valor, Value = x.TablaId.ToString() }), "--Seleccionar--", new {@class = "form-control" })
+            </div>
+            <label for="exampleInputPassword1" class="col-xs-1 control-label">Metodologia LyV</label>
+            <div class="col-xs-3">
+                @Html.DropDownListFor(model => model.Clase.MetodologiaId, Model.Metodologias.Select(x => new SelectListItem { Text = x.Valor, Value = x.TablaId.ToString() }), "--Seleccionar--", new {@class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group form-group-sm">
+            <label for="exampleInputPassword1" class="col-xs-1 control-label">Título</label>
+            <div class="col-xs-3">
+                @Html.DropDownListFor(model => model.Clase.TituloId, Model.Titulos.Select(x => new SelectListItem { Text = x.Valor, Value = x.TablaId.ToString() }), "--Seleccionar--", new {@class = "form-control" })
+            </div>
+            <label for="exampleInputPassword1" class="col-xs-1 control-label">Tema</label>
+            <div class="col-xs-3">
+                @Html.DropDownListFor(model => model.Clase.TemaId, Model.Temas.Select(x => new SelectListItem { Text = x.Valor, Value = x.TablaId.ToString() }), "--Seleccionar--", new {@class = "form-control" })
+            </div>
+            <label for="exampleInputPassword1" class="col-xs-1 control-label">Contenido</label>
+            <div class="col-xs-3">
+                @Html.TextBoxFor(model => model.Clase.Contenido, new {@class = "form-control"})
+            </div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Diseño Académico</legend>
+        <div class="form-group form-group-sm">
+            <label for="exampleInputPassword1" class="col-xs-1 control-label">Competencias</label>
+            <div class="col-xs-3">
+                @Html.TextAreaFor(model => model.Clase.Competencias, 3, 30, new {@class = "form-control"})
+            </div>
+            <label for="exampleInputPassword1" class="col-xs-1 control-label">Capacidades</label>
+            <div class="col-xs-3">
+                @Html.TextAreaFor(model => model.Clase.Capacidades, 3, 30, new {@class = "form-control"})
+            </div>
+            <label for="exampleInputPassword1" class="col-xs-1 control-label">Temas y Contenidos</label>
+            <div class="col-xs-3">
+                @Html.TextAreaFor(model => model.Clase.TemasYContenidos, 3, 30, new {@class = "form-control"})
+            </div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Virtudes y Actitud</legend>
+        <div class="form-group form-group-sm">
+            <label for="exampleInputPassword1" class="col-xs-1 control-label">Virtud General</label>
+            <div class="col-xs-3">
+                @Html.DropDownListFor(model => model.Clase.MetodologiaId, Model.Metodologias.Select(x => new SelectListItem { Text = x.Valor, Value = x.TablaId.ToString() }), "--Seleccionar--", new {@class = "form-control" })
+            </div>
+            <label for="exampleInputPassword1" class="col-xs-1 control-label">Virtud Especifica</label>
+            <div class="col-xs-3">
+                @Html.DropDownListFor(model => model.Clase.MetodologiaId, Model.Metodologias.Select(x => new SelectListItem { Text = x.Valor, Value = x.TablaId.ToString() }), "--Seleccionar--", new {@class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group form-group-sm">
+            <label for="nombreClase" class="col-xs-1 control-label">Indicador</label>
+            <div class="col-xs-11">
+                @Html.TextAreaFor(model => model.Clase.Indicador, 5, 120, new {@class = "form-control"})
+            </div>
+        </div>
+        <div class="form-group">
+            <div style="float:right;margin-right:20px">
+                <button type="submit" class="btn btn-primary btn-sm" >
+                    <span class="glyphicon glyphicon-hdd"></span> Guardar
+                </button>
+            </div>
+        </div>
+    </fieldset>
+}
+</div>
+
+</div>
