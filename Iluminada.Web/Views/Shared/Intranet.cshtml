@@ -2,16 +2,36 @@
     ViewBag.Title = "Intranet";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<header>
+    <div class="widewrapper masthead">
+        <div class="container">
+            <a href="index.html" id="logo">
+                Iluminadas
+            </a>
+        </div>
+    </div>
 
-<header class="navbar navbar-inverse" role="navigation">
-    <div class="container">
-        <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="#/historialClase">Diseñar Clase</a></li>
-                <li><a href="#/historialClase">Historial de Clase</a></li>
-            </ul>
-        </div><!--/.nav-collapse -->
+    <div class="widewrapper subheader">
+        <div class="container">
+            <nav class="tales-nav">
+                <div class="collapse navbar-collapse">
+                    <ul class="nav nav-pills navbar-nav">
+                        <li><a href="#/historialClase">Diseñar Clase</a></li>
+                        <li><a href="#/historialClase">Historial de Clase</a></li>
+                    </ul>
+                </div>
+            </nav> 
+        </div>
     </div>
 </header>
 
 @RenderBody()
+
+<footer>
+    <div class="widewrapper copyright">
+        <div class="container">
+            <!--Note: Feel free to remove or change this link as you please. A link to HackerThemes is not required by any means-->
+            Designed by <a href="http://hackerthemes.com" rel="nofollow">HackerThemes</a>
+        </div>
+    </div>
+</footer>
