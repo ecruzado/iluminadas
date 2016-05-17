@@ -9,11 +9,12 @@
 @using (Html.BeginForm("Crear", "Clase", FormMethod.Post, new {@class = "form-horizontal"})) 
 {
     @Html.HiddenFor(x=>x.Clase.ClaseId)
+    @Html.HiddenFor(x=>x.Clase.EsActivo)
     <h3>Datos Generales</h3>
     <div class="form-group form-group-sm">
         <label for="usuario" class="col-xs-1 control-label">Colegio</label>
         <div class="col-xs-11">
-            <input class="form-control" id="usuario"/>
+            @Html.DropDownListFor(model => model.Clase.ColegioId, Model.Colegios.Select(x => new SelectListItem { Text = x.Valor, Value = x.Codigo.ToString() }), "--Seleccionar--", new {@class = "form-control" })
         </div>
     </div>
     <div class="form-group form-group-sm">
@@ -87,11 +88,11 @@
     <div class="form-group form-group-sm">
         <label for="exampleInputPassword1" class="col-xs-1 control-label">Virtud General</label>
         <div class="col-xs-3">
-            @Html.DropDownListFor(model => model.Clase.VirtudGeneralId, Model.Metodologias.Select(x => new SelectListItem { Text = x.Valor, Value = x.Codigo.ToString() }), "--Seleccionar--", new {@class = "form-control" })
+            @Html.DropDownListFor(model => model.Clase.VirtudGeneralId, Model.VirtudesGeneral.Select(x => new SelectListItem { Text = x.Valor, Value = x.Codigo.ToString() }), "--Seleccionar--", new {@class = "form-control" })
         </div>
         <label for="exampleInputPassword1" class="col-xs-1 control-label">Virtud Especifica</label>
         <div class="col-xs-3">
-            @Html.DropDownListFor(model => model.Clase.VirtudEspecificaId, Model.Metodologias.Select(x => new SelectListItem { Text = x.Valor, Value = x.Codigo.ToString() }), "--Seleccionar--", new {@class = "form-control" })
+            @Html.DropDownListFor(model => model.Clase.VirtudEspecificaId, Model.VirtudesEspecifica.Select(x => new SelectListItem { Text = x.Valor, Value = x.Codigo.ToString() }), "--Seleccionar--", new {@class = "form-control" })
         </div>
     </div>
     <div class="form-group form-group-sm">
@@ -116,10 +117,16 @@
 
 <script type="text/javascript">
     $(function () {
+
         $("#Clase_NivelId").change(function () {
+            $('#Clase_GradoId').empty();
+            $('#Clase_GradoId')
+                .append($("<option></option>")
+                           .attr("value", '')
+                           .text('--Seleccionar--'));
+
             var nivelId = $(this).val();
             $.get('/Clase/Grado?nivelId=' + nivelId, function (items) {
-                $('#Clase_GradoId').empty();
                 $.each(items, function (key, value) {
                     $('#Clase_GradoId')
                         .append($("<option></option>")
@@ -128,6 +135,61 @@
                 });
             });
         });
+
+        $("#Clase_CompetenciaLvId").change(function () {
+            $('#Clase_CapacidadLvId').empty();
+            $('#Clase_CapacidadLvId')
+                .append($("<option></option>")
+                           .attr("value", '')
+                           .text('--Seleccionar--'));
+
+            var competenciaLvId = $(this).val();
+            $.get('/Clase/CapacidadLv?competenciaLvId=' + competenciaLvId, function (items) {
+                $.each(items, function (key, value) {
+                    $('#Clase_CapacidadLvId')
+                        .append($("<option></option>")
+                                   .attr("value", value.Codigo)
+                                   .text(value.Valor));
+                });
+            });
+        });
+
+        $("#Clase_TituloId").change(function () {
+            $('#Clase_TemaId').empty();
+            $('#Clase_TemaId')
+                .append($("<option></option>")
+                           .attr("value", '')
+                           .text('--Seleccionar--'));
+
+            var tituloLvId = $(this).val();
+            $.get('/Clase/TemaLv?tituloLvId=' + tituloLvId, function (items) {
+                $.each(items, function (key, value) {
+                    $('#Clase_TemaId')
+                        .append($("<option></option>")
+                                   .attr("value", value.Codigo)
+                                   .text(value.Valor));
+                });
+            });
+        });
+
+        $("#Clase_VirtudGeneralId").change(function () {
+            $('#Clase_VirtudEspecificaId').empty();
+            $('#Clase_VirtudEspecificaId')
+                .append($("<option></option>")
+                           .attr("value", '')
+                           .text('--Seleccionar--'));
+
+            var virtudGeneralId = $(this).val();
+            $.get('/Clase/VirtudEspecifica?virtudGeneralId=' + virtudGeneralId, function (items) {
+                $.each(items, function (key, value) {
+                    $('#Clase_VirtudEspecificaId')
+                        .append($("<option></option>")
+                                   .attr("value", value.Codigo)
+                                   .text(value.Valor));
+                });
+            });
+        });
+
     });
 </script>
 

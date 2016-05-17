@@ -4,21 +4,22 @@ GO
 create proc sp_clase_insert 
 	@ColegioId int
     ,@Profesor nvarchar(500) = null
-    ,@AreaId int
-    ,@NivelId int
-    ,@GradoId int
-    ,@CompetenciaLvId int
-    ,@CapacidadLvId int
-    ,@MetodologiaLvId int
-    ,@TituloId int
-    ,@TemaId int
+    ,@AreaId int = null
+    ,@NivelId int = null
+    ,@GradoId int = null
+    ,@CompetenciaLvId int = null
+    ,@CapacidadLvId int = null
+    ,@MetodologiaLvId int = null
+    ,@TituloId int = null
+    ,@TemaId int = null
     ,@Contenido nvarchar(500) = null
     ,@Competencia nvarchar(max) = null
     ,@Capacidad nvarchar(max) = null
     ,@TemaContenido nvarchar(max) = null
-    ,@VirtudGeneralId int 
-    ,@VirtudEspecificaId int
+    ,@VirtudGeneralId int  = null
+    ,@VirtudEspecificaId int = null
     ,@Indicador nvarchar(max) = null
+	,@UsuarioCreacion nvarchar(50)
 	,@new_identity bigint = NULL OUTPUT
 
 as
@@ -41,7 +42,10 @@ INSERT INTO [dbo].[Clase]
            ,[TemaContenido]
            ,[VirtudGeneralId]
            ,[VirtudEspecificaId]
-           ,[Indicador])
+           ,[Indicador]
+		   ,[EsActivo]
+		   ,[UsuarioCreacion]
+		   ,[FechaCreacion])
      VALUES
            (@ColegioId
            ,@Profesor
@@ -59,7 +63,10 @@ INSERT INTO [dbo].[Clase]
            ,@TemaContenido
            ,@VirtudGeneralId
            ,@VirtudEspecificaId
-           ,@Indicador)
+           ,@Indicador
+		   ,1
+		   ,@UsuarioCreacion
+		   ,GETDATE())
 
 SET @new_identity = SCOPE_IDENTITY();
 
@@ -69,24 +76,25 @@ go
 
 create proc sp_clase_update
 	@ClaseId bigint
-	,@ColegioId int
-    ,@Profesor nvarchar(500)
-    ,@AreaId int
-    ,@NivelId int
-    ,@GradoId int
-    ,@CompetenciaLvId int
-    ,@CapacidadLvId int
-    ,@MetodologiaLvId int
-    ,@TituloId int
-    ,@TemaId int
-    ,@Contenido nvarchar(500)
-    ,@Competencia nvarchar(max)
-    ,@Capacidad nvarchar(max)
-    ,@TemaContenido nvarchar(max)
-    ,@VirtudGeneralId int
-    ,@VirtudEspecificaId int
-    ,@Indicador nvarchar(max)
-	,@new_identity INT = NULL OUTPUT
+	,@ColegioId int = null
+    ,@Profesor nvarchar(500) = null
+    ,@AreaId int = null
+    ,@NivelId int = null
+    ,@GradoId int = null
+    ,@CompetenciaLvId int = null
+    ,@CapacidadLvId int = null
+    ,@MetodologiaLvId int = null
+    ,@TituloId int = null
+    ,@TemaId int = null
+    ,@Contenido nvarchar(500) = null
+    ,@Competencia nvarchar(max) = null
+    ,@Capacidad nvarchar(max) = null
+    ,@TemaContenido nvarchar(max) = null
+    ,@VirtudGeneralId int = null
+    ,@VirtudEspecificaId int = null
+    ,@Indicador nvarchar(max) = null
+	,@EsActivo bit = NULL
+	,@UsuarioModificacion nvarchar(50) = null
 
 as
 begin
@@ -109,6 +117,9 @@ update [dbo].[Clase]
            ,[VirtudGeneralId] = @VirtudGeneralId
            ,[VirtudEspecificaId] = @VirtudEspecificaId
            ,[Indicador] = @Indicador
+		   ,[EsActivo] = @EsActivo
+		   ,[UsuarioModificacion] = @UsuarioModificacion
+		   ,[FechaModificacion] = GETDATE()
 where ClaseId = @ClaseId
 
 end
@@ -127,32 +138,34 @@ where c.ClaseId = @ClaseId
 end
 go
 
-create proc sp_clase_search
-	@ClaseId bigint
-	,@ColegioId int
-    ,@Profesor nvarchar(500)
-    ,@AreaId int
-    ,@NivelId int
-    ,@GradoId int
-    ,@CompetenciaLvId int
-    ,@CapacidadLvId int
-    ,@MetodologiaLvId int
-    ,@TituloId int
-    ,@TemaId int
-    ,@Contenido nvarchar(500)
-    ,@Competencia nvarchar(max)
-    ,@Capacidad nvarchar(max)
-    ,@TemaContenido nvarchar(max)
-    ,@VirtudGeneralId int
-    ,@VirtudEspecificaId int
-    ,@Indicador nvarchar(max)
-	,@new_identity INT = NULL OUTPUT
-
+alter proc sp_clase_search
+	@ClaseId bigint = null
+	,@ColegioId int = null
+    ,@Profesor nvarchar(500) = null
+    ,@AreaId int = null
+    ,@NivelId int = null
+    ,@GradoId int = null
+    ,@CompetenciaLvId int = null
+    ,@CapacidadLvId int = null
+    ,@MetodologiaLvId int = null
+    ,@TituloId int = null
+    ,@TemaId int = null
+    ,@Contenido nvarchar(500) = null
+    ,@Competencia nvarchar(max) = null
+    ,@Capacidad nvarchar(max) = null
+    ,@TemaContenido nvarchar(max) = null
+    ,@VirtudGeneralId int = null
+    ,@VirtudEspecificaId int = null
+    ,@Indicador nvarchar(max) = null
 as
 begin
 
-select *
+select top 200 c.*, co.Valor as 'Colegio', a.Valor as 'Area', n.Valor as 'Nivel', g.Valor as 'Grado'
 from dbo.Clase c
+inner join Tabla co on co.NombreTabla = 'Colegio' and co.Codigo = c.ColegioId
+inner join Tabla a on a.NombreTabla = 'Area' and a.Codigo = c.AreaId
+inner join Tabla n on n.NombreTabla = 'Nivel' and n.Codigo = c.NivelId
+inner join Tabla g on g.NombreTabla = 'Grado' and g.Codigo = c.GradoId
 where CASE 
 		WHEN @ClaseId IS NULL THEN 1
 		WHEN c.ClaseId = @ClaseId THEN 1
@@ -165,7 +178,7 @@ where CASE
 	END = 1
 	AND CASE
 		WHEN @Profesor IS NULL THEN 1
-		WHEN c.Profesor like @Profesor+'%' THEN 1
+		WHEN c.Profesor like '%'+@Profesor+'%' THEN 1
 		ELSE 0
 	END = 1
 	AND CASE
@@ -210,22 +223,22 @@ where CASE
 	END = 1
 	AND CASE
 		WHEN @Contenido IS NULL THEN 1
-		WHEN c.Contenido like @Contenido+'%' THEN 1
+		WHEN c.Contenido like '%'+@Contenido+'%' THEN 1
 		ELSE 0
 	END = 1
 	AND CASE
 		WHEN @Competencia IS NULL THEN 1
-		WHEN c.Competencia like @Competencia+'%' THEN 1
+		WHEN c.Competencia like '%'+@Competencia+'%' THEN 1
 		ELSE 0
 	END = 1
 	AND CASE
 		WHEN @Capacidad IS NULL THEN 1
-		WHEN c.Capacidad like @Capacidad+'%' THEN 1
+		WHEN c.Capacidad like '%'+@Capacidad+'%' THEN 1
 		ELSE 0
 	END = 1
 	AND CASE
 		WHEN @TemaContenido IS NULL THEN 1
-		WHEN c.TemaContenido like @TemaContenido+'%' THEN 1
+		WHEN c.TemaContenido like '%'+@TemaContenido+'%' THEN 1
 		ELSE 0
 	END = 1
 	AND CASE
@@ -240,7 +253,7 @@ where CASE
 	END = 1
 	AND CASE
 		WHEN @Indicador IS NULL THEN 1
-		WHEN c.Indicador like @Indicador+'%' THEN 1
+		WHEN c.Indicador like '%'+@Indicador+'%' THEN 1
 		ELSE 0
 	END = 1
 ORDER BY c.ClaseId DESC

@@ -17,6 +17,11 @@ create table Clase(
 	VirtudGeneralId int,
 	VirtudEspecificaId int,
 	Indicador nvarchar(max),
+	EsActivo bit,
+	UsuarioCreacion nvarchar(50),
+	FechaCreacion datetime,
+	UsuarioModificacion nvarchar(50),
+	FechaModificacion datetime,
 	CONSTRAINT [PK_clase] PRIMARY KEY CLUSTERED 
 	(
 		ClaseId ASC

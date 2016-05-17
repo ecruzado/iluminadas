@@ -1,0 +1,241 @@
+﻿@model Iluminada.Web.Models.ClaseViewModel
+@{
+    ViewBag.Title = "Crear";
+}
+
+<div class="container">
+
+<div class="row">
+@using (Html.BeginForm("Crear", "Clase", FormMethod.Post, new {@class = "form-horizontal"})) 
+{
+    @Html.HiddenFor(x=>x.Clase.ClaseId)
+    <h3>Datos Generales</h3>
+    <div class="form-group form-group-sm">
+        <label for="usuario" class="col-xs-1 control-label">Colegio</label>
+        <div class="col-xs-11">
+            @Html.DropDownListFor(model => model.Clase.ColegioId, Model.Colegios.Select(x => new SelectListItem { Text = x.Valor, Value = x.Codigo.ToString() }), "--Seleccionar--", new {@class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group form-group-sm">
+        <label for="area" class="col-xs-1 control-label">Profesor</label>
+        <div class="col-xs-11">
+            @Html.TextBoxFor(model => model.Clase.Profesor, new {@class = "form-control"})
+        </div>
+    </div>
+    <div class="form-group form-group-sm">
+        <label for="exampleInputPassword1" class="col-xs-1 control-label">Area</label>
+        <div class="col-xs-3">
+            @Html.DropDownListFor(model => model.Clase.AreaId, Model.Areas.Select(x => new SelectListItem { Text = x.Valor, Value = x.Codigo.ToString() }), "--Seleccionar--", new {@class = "form-control" })
+        </div>
+        <label for="exampleInputPassword1" class="col-xs-1 control-label">Nivel</label>
+        <div class="col-xs-3">
+            @Html.DropDownListFor(model => model.Clase.NivelId, Model.Niveles.Select(x => new SelectListItem { Text = x.Valor, Value = x.Codigo.ToString() }), "--Seleccionar--", new {@class = "form-control" })
+        </div>
+        <label for="exampleInputPassword1" class="col-xs-1 control-label">Grado</label>
+        <div class="col-xs-3">
+            @Html.DropDownListFor(model => model.Clase.GradoId, Model.Grados.Select(x => new SelectListItem { Text = x.Valor, Value = x.Codigo.ToString() }), "--Seleccionar--", new {@class = "form-control" })
+        </div>
+    </div>
+    <hr />
+    <h3>Diseño Sistémico de Luz y Verdad LyV</h3>
+    <div class="form-group form-group-sm">
+        <label for="exampleInputPassword1" class="col-xs-1 control-label">Competencia LyV</label>
+        <div class="col-xs-3">
+            @Html.DropDownListFor(model => model.Clase.CompetenciaLvId, Model.Competencias.Select(x => new SelectListItem { Text = x.Valor, Value = x.Codigo.ToString() }), "--Seleccionar--", new {@class = "form-control" })
+        </div>
+        <label for="exampleInputPassword1" class="col-xs-1 control-label">Capacidad LyV</label>
+        <div class="col-xs-3">
+            @Html.DropDownListFor(model => model.Clase.CapacidadLvId, Model.Capacidades.Select(x => new SelectListItem { Text = x.Valor, Value = x.Codigo.ToString() }), "--Seleccionar--", new {@class = "form-control" })
+        </div>
+        <label for="exampleInputPassword1" class="col-xs-1 control-label">Metodologia LyV</label>
+        <div class="col-xs-3">
+            @Html.DropDownListFor(model => model.Clase.MetodologiaLvId, Model.Metodologias.Select(x => new SelectListItem { Text = x.Valor, Value = x.Codigo.ToString() }), "--Seleccionar--", new {@class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group form-group-sm">
+        <label for="exampleInputPassword1" class="col-xs-1 control-label">Título</label>
+        <div class="col-xs-3">
+            @Html.DropDownListFor(model => model.Clase.TituloId, Model.Titulos.Select(x => new SelectListItem { Text = x.Valor, Value = x.Codigo.ToString() }), "--Seleccionar--", new {@class = "form-control" })
+        </div>
+        <label for="exampleInputPassword1" class="col-xs-1 control-label">Tema</label>
+        <div class="col-xs-3">
+            @Html.DropDownListFor(model => model.Clase.TemaId, Model.Temas.Select(x => new SelectListItem { Text = x.Valor, Value = x.Codigo.ToString() }), "--Seleccionar--", new {@class = "form-control" })
+        </div>
+        <label for="exampleInputPassword1" class="col-xs-1 control-label">Contenido</label>
+        <div class="col-xs-3">
+            @Html.TextBoxFor(model => model.Clase.Contenido, new {@class = "form-control"})
+        </div>
+    </div>
+    <hr />
+    <h3>Diseño Académico</h3>
+    <div class="form-group form-group-sm">
+        <label for="exampleInputPassword1" class="col-xs-1 control-label">Competencias</label>
+        <div class="col-xs-3">
+            @Html.TextBoxFor(model => model.Clase.Competencia, new {@class = "form-control"})
+        </div>
+        <label for="exampleInputPassword1" class="col-xs-1 control-label">Capacidades</label>
+        <div class="col-xs-3">
+            @Html.TextBoxFor(model => model.Clase.Capacidad, new {@class = "form-control"})
+        </div>
+        <label for="exampleInputPassword1" class="col-xs-1 control-label">Temas y Contenidos</label>
+        <div class="col-xs-3">
+            @Html.TextBoxFor(model => model.Clase.TemaContenido, new {@class = "form-control"})
+        </div>
+    </div>
+    <hr />
+    <h3>Virtudes y Actitud</h3>
+    <div class="form-group form-group-sm">
+        <label for="exampleInputPassword1" class="col-xs-1 control-label">Virtud General</label>
+        <div class="col-xs-3">
+            @Html.DropDownListFor(model => model.Clase.VirtudGeneralId, Model.VirtudesGeneral.Select(x => new SelectListItem { Text = x.Valor, Value = x.Codigo.ToString() }), "--Seleccionar--", new {@class = "form-control" })
+        </div>
+        <label for="exampleInputPassword1" class="col-xs-1 control-label">Virtud Especifica</label>
+        <div class="col-xs-3">
+            @Html.DropDownListFor(model => model.Clase.VirtudEspecificaId, Model.VirtudesEspecifica.Select(x => new SelectListItem { Text = x.Valor, Value = x.Codigo.ToString() }), "--Seleccionar--", new {@class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group form-group-sm">
+        <label for="nombreClase" class="col-xs-1 control-label">Indicador</label>
+        <div class="col-xs-11">
+            @Html.TextBoxFor(model => model.Clase.Indicador, new {@class = "form-control"})
+        </div>
+    </div>
+    <div class="form-group">
+        <div style="float:right;margin-right:20px">
+            <button type="reset" class="btn btn-tales-one" >
+                <span class="glyphicon glyphicon-hdd"></span> Limpiar
+            </button>
+            <button type="submit" class="btn btn-tales-one" id="btnBuscar">
+                <span class="glyphicon glyphicon-hdd"></span> Buscar
+            </button>
+        </div>
+    </div>
+}
+</div>
+<br />
+<div class="row">
+    <table class="table table-striped table-hover table-condensed">
+        <thead>
+            <tr class="success">
+                <th>Id</th>
+                <th>Colegio</th>
+                <th>Profesor</th>
+                <th>Area</th>
+                <th>Nivel</th>
+                <th>Grado</th>
+                <th>Usuario</th>
+                <th>Fecha Creación</th>
+                <th>...</th>
+            </tr>
+        </thead>
+        <tbody id="tblClases">
+        </tbody>
+    </table>
+</div>
+
+</div>
+
+@section Scripts{
+
+<script type="text/javascript">
+    $(function () {
+        $("#Clase_NivelId").change(function () {
+            $('#Clase_GradoId').empty();
+            $('#Clase_GradoId')
+                .append($("<option></option>")
+                           .attr("value", '')
+                           .text('--Seleccionar--'));
+
+            var nivelId = $(this).val();
+            $.get('/Clase/Grado?nivelId=' + nivelId, function (items) {
+                $.each(items, function (key, value) {
+                    $('#Clase_GradoId')
+                        .append($("<option></option>")
+                                   .attr("value", value.Codigo)
+                                   .text(value.Valor));
+                });
+            });
+        });
+
+        $("#Clase_CompetenciaLvId").change(function () {
+            $('#Clase_CapacidadLvId').empty();
+            $('#Clase_CapacidadLvId')
+                .append($("<option></option>")
+                           .attr("value", '')
+                           .text('--Seleccionar--'));
+
+            var competenciaLvId = $(this).val();
+            $.get('/Clase/CapacidadLv?competenciaLvId=' + competenciaLvId, function (items) {
+                $.each(items, function (key, value) {
+                    $('#Clase_CapacidadLvId')
+                        .append($("<option></option>")
+                                   .attr("value", value.Codigo)
+                                   .text(value.Valor));
+                });
+            });
+        });
+
+        $("#Clase_TituloId").change(function () {
+            $('#Clase_TemaId').empty();
+            $('#Clase_TemaId')
+                .append($("<option></option>")
+                           .attr("value", '')
+                           .text('--Seleccionar--'));
+
+            var tituloLvId = $(this).val();
+            $.get('/Clase/TemaLv?tituloLvId=' + tituloLvId, function (items) {
+                $.each(items, function (key, value) {
+                    $('#Clase_TemaId')
+                        .append($("<option></option>")
+                                   .attr("value", value.Codigo)
+                                   .text(value.Valor));
+                });
+            });
+        });
+
+        $("#Clase_VirtudGeneralId").change(function () {
+            $('#Clase_VirtudEspecificaId').empty();
+            $('#Clase_VirtudEspecificaId')
+                .append($("<option></option>")
+                           .attr("value", '')
+                           .text('--Seleccionar--'));
+
+            var virtudGeneralId = $(this).val();
+            $.get('/Clase/VirtudEspecifica?virtudGeneralId=' + virtudGeneralId, function (items) {
+                $.each(items, function (key, value) {
+                    $('#Clase_VirtudEspecificaId')
+                        .append($("<option></option>")
+                                   .attr("value", value.Codigo)
+                                   .text(value.Valor));
+                });
+            });
+        });
+
+        $("form").submit(function (event) {
+            var busqueda = $(this).serializeArray();
+            console.log(busqueda);
+            event.preventDefault();
+            $('#tblClases').empty();
+
+            $.post('/Clase/Buscar', busqueda, function (resultado) {
+                $.each(resultado, function (key, value) {
+                    $('#tblClases')
+                        .append($("<tr>" +
+                        "<td>" + value.ClaseId + "</td>" +
+                        "<td>" + value.Colegio + "</td>" +
+                        "<td>" + value.Profesor + "</td>" +
+                        "<td>" + value.Area + "</td>" +
+                        "<td>" + value.Nivel + "</td>" +
+                        "<td>" + value.Grado + "</td>" +
+                        "<td>" + value.UsuarioCreacion + "</td>" +
+                        "<td>" + value.FechaCreacionFormato + "</td>" +
+                        "<td>" + "<a href='/Clase/Editar/" + value.ClaseId + "' target='_blank'>Editar</a>" + "</td>" +
+                        "</tr>"));
+                });
+            });
+        });
+
+    });
+</script>
+
+}

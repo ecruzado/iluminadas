@@ -40,6 +40,7 @@ namespace Iluminada.Web.Data
                         command.Parameters.Add(ObjSqlParameter("@VirtudGeneralId", clase.VirtudGeneralId, ParameterDirection.Input, System.Data.DbType.Int32));
                         command.Parameters.Add(ObjSqlParameter("@VirtudEspecificaId", clase.VirtudEspecificaId, ParameterDirection.Input, System.Data.DbType.Int32));
                         command.Parameters.Add(ObjSqlParameter("@Indicador", clase.Indicador, ParameterDirection.Input, System.Data.DbType.String));
+                        command.Parameters.Add(ObjSqlParameter("@UsuarioCreacion", clase.UsuarioCreacion, ParameterDirection.Input, System.Data.DbType.String));
                         command.Parameters.Add("@new_identity", SqlDbType.BigInt, 12).Direction = ParameterDirection.Output;
                         command.CommandType = CommandType.StoredProcedure;
                         conn.Open();
@@ -91,6 +92,8 @@ namespace Iluminada.Web.Data
                         command.Parameters.Add(ObjSqlParameter("@VirtudGeneralId", clase.VirtudGeneralId, ParameterDirection.Input, System.Data.DbType.Int32));
                         command.Parameters.Add(ObjSqlParameter("@VirtudEspecificaId", clase.VirtudEspecificaId, ParameterDirection.Input, System.Data.DbType.Int32));
                         command.Parameters.Add(ObjSqlParameter("@Indicador", clase.Indicador, ParameterDirection.Input, System.Data.DbType.String));
+                        command.Parameters.Add(ObjSqlParameter("@EsActivo", clase.EsActivo, ParameterDirection.Input, System.Data.DbType.Boolean));
+                        command.Parameters.Add(ObjSqlParameter("@UsuarioModificacion", clase.UsuarioModificacion, ParameterDirection.Input, System.Data.DbType.String));
                         command.CommandType = CommandType.StoredProcedure;
                         conn.Open();
                         retVal = command.ExecuteNonQuery();
@@ -122,23 +125,35 @@ namespace Iluminada.Web.Data
                     {
                         command.CommandType = CommandType.StoredProcedure;
 
-                        command.Parameters.Add(ObjSqlParameter("@ClaseId", claseBusqueda.ClaseId, ParameterDirection.Input, System.Data.DbType.Int64));
-                        command.Parameters.Add(ObjSqlParameter("@ColegioId", claseBusqueda.ColegioId, ParameterDirection.Input, System.Data.DbType.Int32));
+                        if (claseBusqueda.ClaseId != 0)
+                            command.Parameters.Add(ObjSqlParameter("@ClaseId", claseBusqueda.ClaseId, ParameterDirection.Input, System.Data.DbType.Int64));
+                        if (claseBusqueda.ColegioId != 0)
+                            command.Parameters.Add(ObjSqlParameter("@ColegioId", claseBusqueda.ColegioId, ParameterDirection.Input, System.Data.DbType.Int32));
                         command.Parameters.Add(ObjSqlParameter("@Profesor", claseBusqueda.Profesor, ParameterDirection.Input, System.Data.DbType.String));
-                        command.Parameters.Add(ObjSqlParameter("@AreaId", claseBusqueda.AreaId, ParameterDirection.Input, System.Data.DbType.Int32));
-                        command.Parameters.Add(ObjSqlParameter("@NivelId", claseBusqueda.NivelId, ParameterDirection.Input, System.Data.DbType.Int32));
-                        command.Parameters.Add(ObjSqlParameter("@GradoId", claseBusqueda.GradoId, ParameterDirection.Input, System.Data.DbType.Int32));
-                        command.Parameters.Add(ObjSqlParameter("@CompetenciaLvId", claseBusqueda.CompetenciaLvId, ParameterDirection.Input, System.Data.DbType.Int32));
-                        command.Parameters.Add(ObjSqlParameter("@CapacidadLvId", claseBusqueda.CapacidadLvId, ParameterDirection.Input, System.Data.DbType.Int32));
-                        command.Parameters.Add(ObjSqlParameter("@MetodologiaLvId", claseBusqueda.MetodologiaLvId, ParameterDirection.Input, System.Data.DbType.Int32));
-                        command.Parameters.Add(ObjSqlParameter("@TituloId", claseBusqueda.TituloId, ParameterDirection.Input, System.Data.DbType.Int32));
-                        command.Parameters.Add(ObjSqlParameter("@TemaId", claseBusqueda.TemaId, ParameterDirection.Input, System.Data.DbType.Int32));
+                        if (claseBusqueda.AreaId != 0)
+                            command.Parameters.Add(ObjSqlParameter("@AreaId", claseBusqueda.AreaId, ParameterDirection.Input, System.Data.DbType.Int32));
+                        if (claseBusqueda.NivelId != 0)
+                            command.Parameters.Add(ObjSqlParameter("@NivelId", claseBusqueda.NivelId, ParameterDirection.Input, System.Data.DbType.Int32));
+                        if (claseBusqueda.GradoId != 0)
+                            command.Parameters.Add(ObjSqlParameter("@GradoId", claseBusqueda.GradoId, ParameterDirection.Input, System.Data.DbType.Int32));
+                        if (claseBusqueda.CompetenciaLvId != 0)
+                            command.Parameters.Add(ObjSqlParameter("@CompetenciaLvId", claseBusqueda.CompetenciaLvId, ParameterDirection.Input, System.Data.DbType.Int32));
+                        if (claseBusqueda.CapacidadLvId != 0)
+                            command.Parameters.Add(ObjSqlParameter("@CapacidadLvId", claseBusqueda.CapacidadLvId, ParameterDirection.Input, System.Data.DbType.Int32));
+                        if (claseBusqueda.MetodologiaLvId != 0)
+                            command.Parameters.Add(ObjSqlParameter("@MetodologiaLvId", claseBusqueda.MetodologiaLvId, ParameterDirection.Input, System.Data.DbType.Int32));
+                        if (claseBusqueda.TituloId != 0)
+                            command.Parameters.Add(ObjSqlParameter("@TituloId", claseBusqueda.TituloId, ParameterDirection.Input, System.Data.DbType.Int32));
+                        if (claseBusqueda.TemaId != 0)
+                            command.Parameters.Add(ObjSqlParameter("@TemaId", claseBusqueda.TemaId, ParameterDirection.Input, System.Data.DbType.Int32));
                         command.Parameters.Add(ObjSqlParameter("@Contenido", claseBusqueda.Contenido, ParameterDirection.Input, System.Data.DbType.String));
                         command.Parameters.Add(ObjSqlParameter("@Competencia", claseBusqueda.Competencia, ParameterDirection.Input, System.Data.DbType.String));
                         command.Parameters.Add(ObjSqlParameter("@Capacidad", claseBusqueda.Capacidad, ParameterDirection.Input, System.Data.DbType.String));
                         command.Parameters.Add(ObjSqlParameter("@TemaContenido", claseBusqueda.TemaContenido, ParameterDirection.Input, System.Data.DbType.String));
-                        command.Parameters.Add(ObjSqlParameter("@VirtudGeneralId", claseBusqueda.VirtudGeneralId, ParameterDirection.Input, System.Data.DbType.Int32));
-                        command.Parameters.Add(ObjSqlParameter("@VirtudEspecificaId", claseBusqueda.VirtudEspecificaId, ParameterDirection.Input, System.Data.DbType.Int32));
+                        if (claseBusqueda.VirtudGeneralId != 0)
+                            command.Parameters.Add(ObjSqlParameter("@VirtudGeneralId", claseBusqueda.VirtudGeneralId, ParameterDirection.Input, System.Data.DbType.Int32));
+                        if (claseBusqueda.VirtudEspecificaId != 0)
+                            command.Parameters.Add(ObjSqlParameter("@VirtudEspecificaId", claseBusqueda.VirtudEspecificaId, ParameterDirection.Input, System.Data.DbType.Int32));
                         command.Parameters.Add(ObjSqlParameter("@Indicador", claseBusqueda.Indicador, ParameterDirection.Input, System.Data.DbType.String));
                         command.CommandType = CommandType.StoredProcedure;
                         conn.Open();
@@ -166,7 +181,16 @@ namespace Iluminada.Web.Data
                             clase.VirtudGeneralId = dr.IsDBNull(dr.GetOrdinal("VirtudGeneralId")) ? 0 : dr.GetInt32(dr.GetOrdinal("VirtudGeneralId"));
                             clase.VirtudEspecificaId = dr.IsDBNull(dr.GetOrdinal("VirtudEspecificaId")) ? 0 : dr.GetInt32(dr.GetOrdinal("VirtudEspecificaId"));
                             clase.Indicador = dr.IsDBNull(dr.GetOrdinal("Indicador")) ? "" : dr.GetString(dr.GetOrdinal("Indicador"));
-                            lista.Add(claseBusqueda);
+                            clase.Colegio = dr.IsDBNull(dr.GetOrdinal("Colegio")) ? "" : dr.GetString(dr.GetOrdinal("Colegio"));
+                            clase.Area = dr.IsDBNull(dr.GetOrdinal("Area")) ? "" : dr.GetString(dr.GetOrdinal("Area"));
+                            clase.Nivel = dr.IsDBNull(dr.GetOrdinal("Nivel")) ? "" : dr.GetString(dr.GetOrdinal("Nivel"));
+                            clase.Grado = dr.IsDBNull(dr.GetOrdinal("Grado")) ? "" : dr.GetString(dr.GetOrdinal("Grado"));
+                            clase.EsActivo = dr.IsDBNull(dr.GetOrdinal("EsActivo")) ? false : dr.GetBoolean(dr.GetOrdinal("EsActivo"));
+                            clase.UsuarioCreacion = dr.IsDBNull(dr.GetOrdinal("UsuarioCreacion")) ? "" : dr.GetString(dr.GetOrdinal("UsuarioCreacion"));
+                            clase.FechaCreacion = dr.IsDBNull(dr.GetOrdinal("FechaCreacion")) ? DateTime.MinValue : dr.GetDateTime(dr.GetOrdinal("FechaCreacion"));
+                            clase.UsuarioModificacion = dr.IsDBNull(dr.GetOrdinal("UsuarioModificacion")) ? "" : dr.GetString(dr.GetOrdinal("UsuarioModificacion"));
+                            clase.FechaModificacion = dr.IsDBNull(dr.GetOrdinal("FechaModificacion")) ? DateTime.MinValue : dr.GetDateTime(dr.GetOrdinal("FechaModificacion"));
+                            lista.Add(clase);
                         }
                     }
                     return lista;
@@ -222,6 +246,11 @@ namespace Iluminada.Web.Data
                             clase.VirtudGeneralId = dr.IsDBNull(dr.GetOrdinal("VirtudGeneralId")) ? 0 : dr.GetInt32(dr.GetOrdinal("VirtudGeneralId"));
                             clase.VirtudEspecificaId = dr.IsDBNull(dr.GetOrdinal("VirtudEspecificaId")) ? 0 : dr.GetInt32(dr.GetOrdinal("VirtudEspecificaId"));
                             clase.Indicador = dr.IsDBNull(dr.GetOrdinal("Indicador")) ? "" : dr.GetString(dr.GetOrdinal("Indicador"));
+                            clase.EsActivo = dr.IsDBNull(dr.GetOrdinal("EsActivo")) ? false : dr.GetBoolean(dr.GetOrdinal("EsActivo"));
+                            clase.UsuarioCreacion = dr.IsDBNull(dr.GetOrdinal("UsuarioCreacion")) ? "" : dr.GetString(dr.GetOrdinal("UsuarioCreacion"));
+                            clase.FechaCreacion = dr.IsDBNull(dr.GetOrdinal("FechaCreacion")) ? DateTime.MinValue : dr.GetDateTime(dr.GetOrdinal("FechaCreacion"));
+                            clase.UsuarioModificacion = dr.IsDBNull(dr.GetOrdinal("UsuarioModificacion")) ? "" : dr.GetString(dr.GetOrdinal("UsuarioModificacion"));
+                            clase.FechaModificacion = dr.IsDBNull(dr.GetOrdinal("FechaModificacion")) ? DateTime.MinValue : dr.GetDateTime(dr.GetOrdinal("FechaModificacion"));
                         }
                     }
                     return clase;
