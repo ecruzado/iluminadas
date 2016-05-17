@@ -1,4 +1,5 @@
-﻿using Iluminada.Web.Entidad;
+﻿using Iluminada.Web.Common;
+using Iluminada.Web.Entidad;
 using Iluminada.Web.Logica;
 using Iluminada.Web.Models;
 using System;
@@ -18,36 +19,28 @@ namespace Iluminada.Web.Controllers
             ClaseViewModel entidad = new ClaseViewModel();
             entidad.Clase = new Clase();
 
-            var areas = new List<Tabla>();
-            areas.Add(new Tabla { TablaId = 1, Valor = "Area 1" });
-            entidad.Areas = areas;
-
-            var niveles = new List<Tabla>();
-            niveles.Add(new Tabla { TablaId = 1, Valor = "Nivel 1" });
-            entidad.Niveles = niveles;
-
-            var grados = new List<Tabla>();
-            grados.Add(new Tabla { TablaId = 1, Valor = "Grado 1" });
-            entidad.Grados = grados;
+            entidad.Areas = TablaLogica.Instancia.ListPorReferencia(Constantes.TABLA_AREA);
+            entidad.Niveles = TablaLogica.Instancia.ListPorReferencia(Constantes.TABLA_NIVEL);
+            entidad.Grados = new List<Tabla>(); ;
 
             var competencias = new List<Tabla>();
-            competencias.Add(new Tabla { TablaId = 1, Valor = "Competencia 1" });
+            competencias.Add(new Tabla { Codigo = 1, Valor = "Competencia 1" });
             entidad.Competencias = competencias;
 
             var capacidades = new List<Tabla>();
-            capacidades.Add(new Tabla { TablaId = 1, Valor = "Capacidad 1" });
+            capacidades.Add(new Tabla { Codigo = 1, Valor = "Capacidad 1" });
             entidad.Capacidades = capacidades;
 
             var metodologias = new List<Tabla>();
-            metodologias.Add(new Tabla { TablaId = 1, Valor = "Metodologia 1" });
+            metodologias.Add(new Tabla { Codigo = 1, Valor = "Metodologia 1" });
             entidad.Metodologias = metodologias;
 
             var titulos = new List<Tabla>();
-            titulos.Add(new Tabla { TablaId = 1, Valor = "Titulo 1" });
+            titulos.Add(new Tabla { Codigo = 1, Valor = "Titulo 1" });
             entidad.Titulos = titulos;
 
             var temas = new List<Tabla>();
-            temas.Add(new Tabla { TablaId = 1, Valor = "Tema 1" });
+            temas.Add(new Tabla { Codigo = 1, Valor = "Tema 1" });
             entidad.Temas = temas;
 
             return View(entidad);
@@ -87,36 +80,28 @@ namespace Iluminada.Web.Controllers
             ClaseViewModel entidad = new ClaseViewModel();
             entidad.Clase = clase;
 
-            var areas = new List<Tabla>();
-            areas.Add(new Tabla { TablaId = 1, Valor = "Area 1" });
-            entidad.Areas = areas;
-
-            var niveles = new List<Tabla>();
-            niveles.Add(new Tabla { TablaId = 1, Valor = "Nivel 1" });
-            entidad.Niveles = niveles;
-
-            var grados = new List<Tabla>();
-            grados.Add(new Tabla { TablaId = 1, Valor = "Grado 1" });
-            entidad.Grados = grados;
+            entidad.Areas = TablaLogica.Instancia.ListPorReferencia(Constantes.TABLA_AREA);
+            entidad.Niveles = TablaLogica.Instancia.ListPorReferencia(Constantes.TABLA_NIVEL);
+            entidad.Grados = new List<Tabla>(); ;
 
             var competencias = new List<Tabla>();
-            competencias.Add(new Tabla { TablaId = 1, Valor = "Competencia 1" });
+            competencias.Add(new Tabla { Codigo = 1, Valor = "Competencia 1" });
             entidad.Competencias = competencias;
 
             var capacidades = new List<Tabla>();
-            capacidades.Add(new Tabla { TablaId = 1, Valor = "Capacidad 1" });
+            capacidades.Add(new Tabla { Codigo = 1, Valor = "Capacidad 1" });
             entidad.Capacidades = capacidades;
 
             var metodologias = new List<Tabla>();
-            metodologias.Add(new Tabla { TablaId = 1, Valor = "Metodologia 1" });
+            metodologias.Add(new Tabla { Codigo = 1, Valor = "Metodologia 1" });
             entidad.Metodologias = metodologias;
 
             var titulos = new List<Tabla>();
-            titulos.Add(new Tabla { TablaId = 1, Valor = "Titulo 1" });
+            titulos.Add(new Tabla { Codigo = 1, Valor = "Titulo 1" });
             entidad.Titulos = titulos;
 
             var temas = new List<Tabla>();
-            temas.Add(new Tabla { TablaId = 1, Valor = "Tema 1" });
+            temas.Add(new Tabla { Codigo = 1, Valor = "Tema 1" });
             entidad.Temas = temas;
 
             return View("Crear", entidad);
@@ -140,30 +125,11 @@ namespace Iluminada.Web.Controllers
             }
         }
 
-        //
-        // GET: /Clase/Delete/5
-
-        public ActionResult Delete(int id)
+         public ActionResult Grado(int nivelId)
         {
-            return View();
+            return Json(TablaLogica.Instancia.ListPorReferencia(Constantes.TABLA_GRADO, nivelId),
+                JsonRequestBehavior.AllowGet);
         }
 
-        //
-        // POST: /Clase/Delete/5
-
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

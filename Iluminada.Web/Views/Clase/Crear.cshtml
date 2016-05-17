@@ -25,15 +25,15 @@
     <div class="form-group form-group-sm">
         <label for="exampleInputPassword1" class="col-xs-1 control-label">Area</label>
         <div class="col-xs-3">
-            @Html.DropDownListFor(model => model.Clase.AreaId, Model.Areas.Select(x => new SelectListItem { Text = x.Valor, Value = x.TablaId.ToString() }), "--Seleccionar--", new {@class = "form-control" })
+            @Html.DropDownListFor(model => model.Clase.AreaId, Model.Areas.Select(x => new SelectListItem { Text = x.Valor, Value = x.Codigo.ToString() }), "--Seleccionar--", new {@class = "form-control" })
         </div>
         <label for="exampleInputPassword1" class="col-xs-1 control-label">Nivel</label>
         <div class="col-xs-3">
-            @Html.DropDownListFor(model => model.Clase.NivelId, Model.Niveles.Select(x => new SelectListItem { Text = x.Valor, Value = x.TablaId.ToString() }), "--Seleccionar--", new {@class = "form-control" })
+            @Html.DropDownListFor(model => model.Clase.NivelId, Model.Niveles.Select(x => new SelectListItem { Text = x.Valor, Value = x.Codigo.ToString() }), "--Seleccionar--", new {@class = "form-control" })
         </div>
         <label for="exampleInputPassword1" class="col-xs-1 control-label">Grado</label>
         <div class="col-xs-3">
-            @Html.DropDownListFor(model => model.Clase.GradoId, Model.Grados.Select(x => new SelectListItem { Text = x.Valor, Value = x.TablaId.ToString() }), "--Seleccionar--", new {@class = "form-control" })
+            @Html.DropDownListFor(model => model.Clase.GradoId, Model.Grados.Select(x => new SelectListItem { Text = x.Valor, Value = x.Codigo.ToString() }), "--Seleccionar--", new {@class = "form-control" })
         </div>
     </div>
     <hr />
@@ -41,25 +41,25 @@
     <div class="form-group form-group-sm">
         <label for="exampleInputPassword1" class="col-xs-1 control-label">Competencia LyV</label>
         <div class="col-xs-3">
-            @Html.DropDownListFor(model => model.Clase.CompetenciaLvId, Model.Competencias.Select(x => new SelectListItem { Text = x.Valor, Value = x.TablaId.ToString() }), "--Seleccionar--", new {@class = "form-control" })
+            @Html.DropDownListFor(model => model.Clase.CompetenciaLvId, Model.Competencias.Select(x => new SelectListItem { Text = x.Valor, Value = x.Codigo.ToString() }), "--Seleccionar--", new {@class = "form-control" })
         </div>
         <label for="exampleInputPassword1" class="col-xs-1 control-label">Capacidad LyV</label>
         <div class="col-xs-3">
-            @Html.DropDownListFor(model => model.Clase.CapacidadLvId, Model.Capacidades.Select(x => new SelectListItem { Text = x.Valor, Value = x.TablaId.ToString() }), "--Seleccionar--", new {@class = "form-control" })
+            @Html.DropDownListFor(model => model.Clase.CapacidadLvId, Model.Capacidades.Select(x => new SelectListItem { Text = x.Valor, Value = x.Codigo.ToString() }), "--Seleccionar--", new {@class = "form-control" })
         </div>
         <label for="exampleInputPassword1" class="col-xs-1 control-label">Metodologia LyV</label>
         <div class="col-xs-3">
-            @Html.DropDownListFor(model => model.Clase.MetodologiaLvId, Model.Metodologias.Select(x => new SelectListItem { Text = x.Valor, Value = x.TablaId.ToString() }), "--Seleccionar--", new {@class = "form-control" })
+            @Html.DropDownListFor(model => model.Clase.MetodologiaLvId, Model.Metodologias.Select(x => new SelectListItem { Text = x.Valor, Value = x.Codigo.ToString() }), "--Seleccionar--", new {@class = "form-control" })
         </div>
     </div>
     <div class="form-group form-group-sm">
         <label for="exampleInputPassword1" class="col-xs-1 control-label">Título</label>
         <div class="col-xs-3">
-            @Html.DropDownListFor(model => model.Clase.TituloId, Model.Titulos.Select(x => new SelectListItem { Text = x.Valor, Value = x.TablaId.ToString() }), "--Seleccionar--", new {@class = "form-control" })
+            @Html.DropDownListFor(model => model.Clase.TituloId, Model.Titulos.Select(x => new SelectListItem { Text = x.Valor, Value = x.Codigo.ToString() }), "--Seleccionar--", new {@class = "form-control" })
         </div>
         <label for="exampleInputPassword1" class="col-xs-1 control-label">Tema</label>
         <div class="col-xs-3">
-            @Html.DropDownListFor(model => model.Clase.TemaId, Model.Temas.Select(x => new SelectListItem { Text = x.Valor, Value = x.TablaId.ToString() }), "--Seleccionar--", new {@class = "form-control" })
+            @Html.DropDownListFor(model => model.Clase.TemaId, Model.Temas.Select(x => new SelectListItem { Text = x.Valor, Value = x.Codigo.ToString() }), "--Seleccionar--", new {@class = "form-control" })
         </div>
         <label for="exampleInputPassword1" class="col-xs-1 control-label">Contenido</label>
         <div class="col-xs-3">
@@ -87,11 +87,11 @@
     <div class="form-group form-group-sm">
         <label for="exampleInputPassword1" class="col-xs-1 control-label">Virtud General</label>
         <div class="col-xs-3">
-            @Html.DropDownListFor(model => model.Clase.VirtudGeneralId, Model.Metodologias.Select(x => new SelectListItem { Text = x.Valor, Value = x.TablaId.ToString() }), "--Seleccionar--", new {@class = "form-control" })
+            @Html.DropDownListFor(model => model.Clase.VirtudGeneralId, Model.Metodologias.Select(x => new SelectListItem { Text = x.Valor, Value = x.Codigo.ToString() }), "--Seleccionar--", new {@class = "form-control" })
         </div>
         <label for="exampleInputPassword1" class="col-xs-1 control-label">Virtud Especifica</label>
         <div class="col-xs-3">
-            @Html.DropDownListFor(model => model.Clase.VirtudEspecificaId, Model.Metodologias.Select(x => new SelectListItem { Text = x.Valor, Value = x.TablaId.ToString() }), "--Seleccionar--", new {@class = "form-control" })
+            @Html.DropDownListFor(model => model.Clase.VirtudEspecificaId, Model.Metodologias.Select(x => new SelectListItem { Text = x.Valor, Value = x.Codigo.ToString() }), "--Seleccionar--", new {@class = "form-control" })
         </div>
     </div>
     <div class="form-group form-group-sm">
@@ -111,3 +111,24 @@
 </div>
 
 </div>
+
+@section Scripts{
+
+<script type="text/javascript">
+    $(function () {
+        $("#Clase_NivelId").change(function () {
+            var nivelId = $(this).val();
+            $.get('/Clase/Grado?nivelId=' + nivelId, function (items) {
+                $('#Clase_GradoId').empty();
+                $.each(items, function (key, value) {
+                    $('#Clase_GradoId')
+                        .append($("<option></option>")
+                                   .attr("value", value.Codigo)
+                                   .text(value.Valor));
+                });
+            });
+        });
+    });
+</script>
+
+}

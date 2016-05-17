@@ -12,9 +12,9 @@ namespace Iluminada.Web.Logica
     {
         private readonly TablaData tablaData = new TablaData();
 
-        public List<Tabla> ListPorReferencia(string nombreTabla, int? tablaPadreId = null)
+        public List<Tabla> ListPorReferencia(string nombreTabla, int? codigoPadre = null)
         {
-            return tablaData.ListPorReferencia(nombreTabla, tablaPadreId);
+            return tablaData.ListPorReferencia(nombreTabla, codigoPadre);
         }
     }
 }

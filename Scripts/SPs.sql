@@ -248,3 +248,23 @@ ORDER BY c.ClaseId DESC
 end
 
 go
+
+
+create proc sp_tabla_list
+	@nombreTabla nvarchar(50),
+	@codigoPadre int = null
+as
+begin
+
+select *
+from dbo.Tabla t
+where t.NombreTabla = @nombreTabla
+	AND CASE
+		WHEN @codigoPadre IS NULL THEN 1
+		WHEN t.CodigoPadre = @codigoPadre THEN 1
+		ELSE 0
+	END = 1
+
+end
+
+go

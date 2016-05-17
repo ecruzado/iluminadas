@@ -8,9 +8,9 @@ namespace Iluminada.Web.Entidad
     public class Tabla
     {
         public string NombreTabla { get; set; }
-        public int TablaId { get; set; }
+        public int Codigo { get; set; }
         public string Valor { get; set; }
-        public int? TablaPadreId { get; set; }
+        public int? CodigoPadre { get; set; }
         public bool EsActivo { get; set; }
 
 
