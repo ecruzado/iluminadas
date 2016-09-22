@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -8,10 +9,17 @@ namespace Iluminada.Web.Entidad
     public class Clase
     {
         public long ClaseId { get; set; }
+        [Required(ErrorMessage = "Campo Obligatorio")]
         public int ColegioId { get; set; }
+        [Required(ErrorMessage = "Campo Obligatorio")]
         public string Profesor { get; set; }
+        [Required(ErrorMessage = "Campo Obligatorio")]
+        public string Nombre { get; set; }
+        [Required(ErrorMessage = "Campo Obligatorio")]
         public int AreaId { get; set; }
+        [Required(ErrorMessage = "Campo Obligatorio")]
         public int NivelId { get; set; }
+        [Required(ErrorMessage = "Campo Obligatorio")]
         public int GradoId { get; set; }
         public int CompetenciaLvId { get; set; }
         public int CapacidadLvId { get; set; }
@@ -35,6 +43,7 @@ namespace Iluminada.Web.Entidad
         public string Area { get; set; }
         public string Nivel { get; set; }
         public string Grado { get; set; }
+        public string Archivo { get; set; }
 
         public string FechaCreacionFormato 
         {

@@ -35,3 +35,22 @@ insert into Tabla(NombreTabla, Codigo, Valor, CodigoPadre, EsActivo)
 values ('Colegio', 1, 'Colegio 1', null, 1)
 insert into Tabla(NombreTabla, Codigo, Valor, CodigoPadre, EsActivo)
 values ('Colegio', 2, 'Colegio 2', null, 1)
+
+---- Area
+insert into Tabla(NombreTabla, Codigo, Valor, CodigoPadre, EsActivo)
+values ('Area', 1, 'Area 1', null, 1)
+insert into Tabla(NombreTabla, Codigo, Valor, CodigoPadre, EsActivo)
+values ('Area', 2, 'Are 2', null, 1)
+
+
+---- Nivel
+insert into Tabla(NombreTabla, Codigo, Valor, CodigoPadre, EsActivo)
+values ('Nivel', 1, 'Nivel 1', 1, 1)
+insert into Tabla(NombreTabla, Codigo, Valor, CodigoPadre, EsActivo)
+values ('Nivel', 2, 'Nivel 2', 2, 1)
+
+---- Grado
+insert into Tabla(NombreTabla, Codigo, Valor, CodigoPadre, EsActivo)
+values ('Grado', 1, 'Area 1', 1, 1)
+insert into Tabla(NombreTabla, Codigo, Valor, CodigoPadre, EsActivo)
+values ('Grado', 2, 'Are 2', 2, 1)

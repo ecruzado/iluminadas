@@ -6,35 +6,47 @@
 <div class="container">
 
 <div class="row">
-@using (Html.BeginForm("Crear", "Clase", FormMethod.Post, new {@class = "form-horizontal"})) 
+@using (Html.BeginForm("Crear", "Clase", FormMethod.Post, new {@class = "form-horizontal", enctype = "multipart/form-data" })) 
 {
     @Html.HiddenFor(x=>x.Clase.ClaseId)
     @Html.HiddenFor(x=>x.Clase.EsActivo)
     <h3>Datos Generales</h3>
     <div class="form-group form-group-sm">
-        <label for="usuario" class="col-xs-1 control-label">Colegio</label>
+        <label for="usuario" class="col-xs-1 control-label">Colegio *</label>
         <div class="col-xs-11">
             @Html.DropDownListFor(model => model.Clase.ColegioId, Model.Colegios.Select(x => new SelectListItem { Text = x.Valor, Value = x.Codigo.ToString() }), "--Seleccionar--", new {@class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Clase.Profesor, "", new { @class = "help-block" })
         </div>
     </div>
     <div class="form-group form-group-sm">
-        <label for="area" class="col-xs-1 control-label">Profesor</label>
+        <label for="area" class="col-xs-1 control-label">Profesor *</label>
         <div class="col-xs-11">
             @Html.TextBoxFor(model => model.Clase.Profesor, new {@class = "form-control"})
+            @Html.ValidationMessageFor(model => model.Clase.Profesor, "", new { @class = "help-block" })
         </div>
     </div>
     <div class="form-group form-group-sm">
-        <label for="exampleInputPassword1" class="col-xs-1 control-label">Area</label>
+        <label for="area" class="col-xs-1 control-label">Nombre *</label>
+        <div class="col-xs-11">
+            @Html.TextBoxFor(model => model.Clase.Nombre, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Clase.Nombre, "", new { @class = "help-block" })
+        </div>
+    </div>
+    <div class="form-group form-group-sm">
+        <label for="exampleInputPassword1" class="col-xs-1 control-label">Area *</label>
         <div class="col-xs-3">
             @Html.DropDownListFor(model => model.Clase.AreaId, Model.Areas.Select(x => new SelectListItem { Text = x.Valor, Value = x.Codigo.ToString() }), "--Seleccionar--", new {@class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Clase.AreaId, "", new { @class = "help-block" })
         </div>
-        <label for="exampleInputPassword1" class="col-xs-1 control-label">Nivel</label>
+        <label for="exampleInputPassword1" class="col-xs-1 control-label">Nivel *</label>
         <div class="col-xs-3">
             @Html.DropDownListFor(model => model.Clase.NivelId, Model.Niveles.Select(x => new SelectListItem { Text = x.Valor, Value = x.Codigo.ToString() }), "--Seleccionar--", new {@class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Clase.NivelId, "", new { @class = "help-block" })
         </div>
-        <label for="exampleInputPassword1" class="col-xs-1 control-label">Grado</label>
+        <label for="exampleInputPassword1" class="col-xs-1 control-label">Grado *</label>
         <div class="col-xs-3">
             @Html.DropDownListFor(model => model.Clase.GradoId, Model.Grados.Select(x => new SelectListItem { Text = x.Valor, Value = x.Codigo.ToString() }), "--Seleccionar--", new {@class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Clase.GradoId, "", new { @class = "help-block" })
         </div>
     </div>
     <hr />
@@ -100,6 +112,13 @@
         <div class="col-xs-11">
             @Html.TextAreaFor(model => model.Clase.Indicador, 5, 120, new {@class = "form-control"})
         </div>
+    </div>
+    <div class="">
+        @if (!String.IsNullOrEmpty(Model.Clase.Archivo))
+        {
+            <a href="~/Archivos/@Model.Clase.Archivo" target="_blank">@Model.Clase.Archivo</a>
+        }
+        <input type="file" name="file" />
     </div>
     <div class="form-group">
         <div style="float:right;margin-right:20px">

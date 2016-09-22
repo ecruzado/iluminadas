@@ -4,6 +4,7 @@ using Iluminada.Web.Logica;
 using Iluminada.Web.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -38,6 +39,7 @@ namespace Iluminada.Web.Controllers
             {
                 clase.UsuarioCreacion = "Usuario1";
                 clase.FechaCreacion = DateTime.Now;
+                clase.Archivo = GuardarArchivo();
 
                 if (clase.ClaseId == 0)
                 {
@@ -127,5 +129,21 @@ namespace Iluminada.Web.Controllers
                 JsonRequestBehavior.AllowGet);
         }
 
+        private string GuardarArchivo() 
+        {
+            if (Request.Files.Count > 0)
+            {
+                var file = Request.Files[0];
+
+                if (file != null && file.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(file.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Archivos/"), fileName);
+                    file.SaveAs(path);
+                    return fileName;
+                }
+            }
+            return "";
+        }
     }
 }

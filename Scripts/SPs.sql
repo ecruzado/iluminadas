@@ -4,6 +4,7 @@ GO
 create proc sp_clase_insert 
 	@ColegioId int
     ,@Profesor nvarchar(500) = null
+    ,@Nombre nvarchar(500) = null
     ,@AreaId int = null
     ,@NivelId int = null
     ,@GradoId int = null
@@ -19,6 +20,7 @@ create proc sp_clase_insert
     ,@VirtudGeneralId int  = null
     ,@VirtudEspecificaId int = null
     ,@Indicador nvarchar(max) = null
+	,@Archivo nvarchar(500) = null
 	,@UsuarioCreacion nvarchar(50)
 	,@new_identity bigint = NULL OUTPUT
 
@@ -28,6 +30,7 @@ begin
 INSERT INTO [dbo].[Clase]
            ([ColegioId]
            ,[Profesor]
+		   ,[Nombre]
            ,[AreaId]
            ,[NivelId]
            ,[GradoId]
@@ -43,12 +46,14 @@ INSERT INTO [dbo].[Clase]
            ,[VirtudGeneralId]
            ,[VirtudEspecificaId]
            ,[Indicador]
+		   ,[Archivo]
 		   ,[EsActivo]
 		   ,[UsuarioCreacion]
 		   ,[FechaCreacion])
      VALUES
            (@ColegioId
            ,@Profesor
+		   ,@Nombre
            ,@AreaId
            ,@NivelId
            ,@GradoId
@@ -64,6 +69,7 @@ INSERT INTO [dbo].[Clase]
            ,@VirtudGeneralId
            ,@VirtudEspecificaId
            ,@Indicador
+		   ,@Archivo
 		   ,1
 		   ,@UsuarioCreacion
 		   ,GETDATE())
@@ -78,6 +84,7 @@ create proc sp_clase_update
 	@ClaseId bigint
 	,@ColegioId int = null
     ,@Profesor nvarchar(500) = null
+	,@Nombre nvarchar(500) = null
     ,@AreaId int = null
     ,@NivelId int = null
     ,@GradoId int = null
@@ -93,6 +100,7 @@ create proc sp_clase_update
     ,@VirtudGeneralId int = null
     ,@VirtudEspecificaId int = null
     ,@Indicador nvarchar(max) = null
+	,@Archivo nvarchar(500) = null
 	,@EsActivo bit = NULL
 	,@UsuarioModificacion nvarchar(50) = null
 
@@ -102,6 +110,7 @@ begin
 update [dbo].[Clase]
     set [ColegioId] = @ColegioId
            ,[Profesor] = @Profesor
+		   ,[Nombre] = @Nombre
            ,[AreaId] = @AreaId
            ,[NivelId] = @NivelId
            ,[GradoId] = @GradoId
@@ -117,6 +126,7 @@ update [dbo].[Clase]
            ,[VirtudGeneralId] = @VirtudGeneralId
            ,[VirtudEspecificaId] = @VirtudEspecificaId
            ,[Indicador] = @Indicador
+		   ,[Archivo] = @Archivo
 		   ,[EsActivo] = @EsActivo
 		   ,[UsuarioModificacion] = @UsuarioModificacion
 		   ,[FechaModificacion] = GETDATE()
@@ -138,10 +148,11 @@ where c.ClaseId = @ClaseId
 end
 go
 
-alter proc sp_clase_search
+create proc sp_clase_search
 	@ClaseId bigint = null
 	,@ColegioId int = null
     ,@Profesor nvarchar(500) = null
+	,@Nombre nvarchar(500) = null
     ,@AreaId int = null
     ,@NivelId int = null
     ,@GradoId int = null
@@ -181,6 +192,11 @@ where CASE
 		WHEN c.Profesor like '%'+@Profesor+'%' THEN 1
 		ELSE 0
 	END = 1
+	AND CASE
+		WHEN @Nombre IS NULL THEN 1
+		WHEN c.Nombre like '%'+@Nombre+'%' THEN 1
+		ELSE 0
+	END = 1	
 	AND CASE
 		WHEN @AreaId IS NULL THEN 1
 		WHEN c.AreaId = @AreaId THEN 1
