@@ -1,6 +1,3 @@
-USE [Iluminada]
-GO
-
 create proc sp_clase_insert 
 	@ColegioId int
     ,@Profesor nvarchar(500) = null

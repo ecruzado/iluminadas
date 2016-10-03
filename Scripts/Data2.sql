@@ -1,5 +1,3 @@
-use Iluminada
-go
 
 ---- Competencia Lv
 insert into Tabla(NombreTabla, Codigo, Valor, CodigoPadre, EsActivo)

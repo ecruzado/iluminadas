@@ -6,7 +6,7 @@
 <div class="container">
 
 <div class="row">
-@using (Html.BeginForm("Crear", "Clase", FormMethod.Post, new {@class = "form-horizontal"})) 
+@using (Html.BeginForm("Crear", "Clase", FormMethod.Post, new { @class = "form-horizontal", novalidate = "novalidate" })) 
 {
     @Html.HiddenFor(x=>x.Clase.ClaseId)
     <h3>Datos Generales</h3>
@@ -139,6 +139,10 @@
 
 <script type="text/javascript">
     $(function () {
+        $('input selector').each(function () {
+            $(this).rules('remove','required');
+        });
+
         $("#Clase_NivelId").change(function () {
             $('#Clase_GradoId').empty();
             $('#Clase_GradoId')
@@ -213,10 +217,10 @@
 
         $("form").submit(function (event) {
             var busqueda = $(this).serializeArray();
-            console.log(busqueda);
+            // console.log(busqueda);
             event.preventDefault();
             $('#tblClases').empty();
-
+            $('#tblClases').focus();
             $.post('/Clase/Buscar', busqueda, function (resultado) {
                 $.each(resultado, function (key, value) {
                     $('#tblClases')
