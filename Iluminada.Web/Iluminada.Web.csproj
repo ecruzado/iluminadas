@@ -108,21 +108,27 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Code\Constantes.cs" />
     <Compile Include="Common\Constantes.cs" />
     <Compile Include="Common\Singleton.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ClaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Data\BaseData.cs" />
     <Compile Include="Data\ClaseData.cs" />
     <Compile Include="Data\TablaData.cs" />
+    <Compile Include="Data\UsuarioData.cs" />
     <Compile Include="Entidad\Clase.cs" />
     <Compile Include="Entidad\Tabla.cs" />
+    <Compile Include="Entidad\Usuario.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Logica\ClaseLogica.cs" />
     <Compile Include="Logica\TablaLogica.cs" />
+    <Compile Include="Logica\UsuarioLogica.cs" />
     <Compile Include="Models\ClaseViewModel.cs" />
+    <Compile Include="Models\LogOnModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -167,8 +173,10 @@
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Web.config" />
+    <Content Include="Views\Account\LogOn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

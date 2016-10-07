@@ -6,7 +6,7 @@
 <div class="container">
 
 <div class="row">
-@using (Html.BeginForm("Crear", "Clase", FormMethod.Post, new { @class = "form-horizontal", novalidate = "novalidate" })) 
+@using (Html.BeginForm("Crear", "Clase", FormMethod.Post, new { @class = "form-horizontal", novalidate = "" })) 
 {
     @Html.HiddenFor(x=>x.Clase.ClaseId)
     <h3>Datos Generales</h3>
@@ -102,7 +102,7 @@
     </div>
     <div class="form-group">
         <div style="float:right;margin-right:20px">
-            <button type="reset" class="btn btn-tales-one" >
+            <button id="btnLimpiar" type="reset" class="btn btn-tales-one" >
                 <span class="glyphicon glyphicon-hdd"></span> Limpiar
             </button>
             <button type="submit" class="btn btn-tales-one" id="btnBuscar">
@@ -215,13 +215,18 @@
             });
         });
 
-        $("form").submit(function (event) {
-            var busqueda = $(this).serializeArray();
-            // console.log(busqueda);
-            event.preventDefault();
+        $("#btnLimpiar").click(function (event) {
             $('#tblClases').empty();
             $('#tblClases').focus();
+        });
+
+        $("form").submit(function (event) {
+            event.preventDefault();
+            var busqueda = $(this).serializeArray();
+            // console.log(busqueda);
+            $('#tblClases').empty();
             $.post('/Clase/Buscar', busqueda, function (resultado) {
+                $('#btnBuscar').focus();
                 $.each(resultado, function (key, value) {
                     $('#tblClases')
                         .append($("<tr>" +

@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace Iluminada.Web.Controllers
 {
+    [Authorize]
     public class ClaseController : Controller
     {
         public ActionResult Crear()

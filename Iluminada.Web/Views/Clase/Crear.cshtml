@@ -118,7 +118,10 @@
         {
             <a href="~/Archivos/@Model.Clase.Archivo" target="_blank">@Model.Clase.Archivo</a>
         }
-        <input type="file" name="file" />
+        <input id="file" type="file" name="file" style="display:inline-block" />
+        <button id="btnEliminarArchivo" type="button" class="btn btn-default" style="display:inline-block">
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        </button>
     </div>
     <div class="form-group">
         <div style="float:right;margin-right:20px">
@@ -136,6 +139,9 @@
 
 <script type="text/javascript">
     $(function () {
+        $("#btnEliminarArchivo").click(function () {
+            $("#file").val("");
+        });
 
         $("#Clase_NivelId").change(function () {
             $('#Clase_GradoId').empty();

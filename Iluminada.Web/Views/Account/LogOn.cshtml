@@ -1,0 +1,101 @@
+﻿@model Iluminada.Web.Models.LogOnModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Iniciar Sesión &middot; Sistema de Reclutamiento</title>
+    <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" type="text/css" />
+    <!--[if lt IE 9]>
+    <![endif]-->
+    <style type="text/css">
+        body {
+            padding-top: 100px;
+            padding-bottom: 40px;
+            border: 0px;
+            background-color: #f5f5f5;
+        }
+
+        .form-signin {
+            max-width: 350px;
+            padding: 19px 29px 29px;
+            margin: 0 auto 20px;
+            background-color: #fff;
+            border: 1px solid #e5e5e5;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+            -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+            box-shadow: 0 1px 2px rgba(0,0,0,.05);
+        }
+
+            .form-signin .form-signin-heading,
+            .form-signin .checkbox {
+                margin-bottom: 10px;
+            }
+
+            .form-signin input[type="text"],
+            .form-signin input[type="password"] {
+                font-size: 16px;
+                height: auto;
+                margin-bottom: 15px;
+                padding: 7px 9px;
+            }
+
+        .alert-info {
+            background-color: #772953;
+            border-color: #772953;
+            color: #fff;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        @using (Html.BeginForm("LogOn", "Account", FormMethod.Post, new { @class = "form-signin", enctype = "multipart/form-data" }))
+        {
+            <div style="text-align:center;clear:both">
+                <img src="@Url.Content("~/Content/Images/Logo.png")" alt="Ingresar" title="Ingresar" style="" />
+            </div>
+            <br />
+            <div class="alert alert-info" style="font-size:15px;display:none">
+                Sistema de Reclutamiento y Seleccion de Personal
+            </div>
+            <label style="font-weight:bold;font-size:13px;">Usuario</label>
+            @Html.TextBoxFor(model => model.UserName, new { @class = "input-block-level", placeholder = "Usuario" })
+
+            <label style="font-weight:bold;font-size:13px;">Contraseña</label>
+            @Html.TextBoxFor(model => model.Password, new { @class = "input-block-level", type = "password", placeholder = "Contraseña", @maxlength = "20" })
+            <br />
+            <br />
+            <div style="text-align:center">
+                <button id="btnIniciarSesion" type="submit" class="btn btn-primary">Iniciar Sesión</button>
+            </div>
+            <br />
+            if (!Html.ViewData.ModelState.IsValid)
+            {
+                <div class="alert alert-dismissable alert-danger">
+                    @foreach (var modelError in Html.ViewData.ModelState.SelectMany(keyValuePair => keyValuePair.Value.Errors))
+                    {
+                        <p>@modelError.ErrorMessage</p>
+                    }
+                </div>
+            }
+            <!--[if lt IE 9]>
+                <div class="alert alert-dismissable alert-warning">
+                    <h4>¡Página deshabilitada!</h4>
+                    <p>La página web no puede ejecutarse en esta versión de Internet Explorer, por favor actualice su navegador a la última versión.</p>
+                </div>
+            <![endif]-->
+        }
+    </div>
+    <!--[if lt IE 9]>
+        <script type="text/javascript">
+            document.getElementById("btnIniciarSesion").disabled=true
+        </script>
+    <![endif]-->
+</body>
+</html>

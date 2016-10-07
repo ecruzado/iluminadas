@@ -47,3 +47,35 @@ create table Tabla(
 )
 
 GO
+
+
+CREATE TABLE [dbo].[Colegio](
+	[ColegioId] [int] IDENTITY(1,1) NOT NULL,
+	[ColegioNombre] [nvarchar](250) NULL,
+	[ColegioDireccion] [nvarchar](250) NULL,
+	[ColegioTelefono] [nvarchar](25) NULL,
+	CONSTRAINT [PK_colegio] PRIMARY KEY CLUSTERED 
+	(
+		[ColegioId]
+	)
+)
+GO
+
+
+CREATE TABLE [dbo].[Usuario](
+	[UsuarioId] [int] IDENTITY(1,1) NOT NULL,
+	[Usuario] [nvarchar](50) NULL,
+	[Nombres] [nvarchar](250) NULL,
+	[Apematerno] [nvarchar](150) NULL,
+	[Apepaterno] [nvarchar](150) NULL,
+	[Pass] [varbinary](max) NULL,
+	[Correo] [nvarchar](150) NULL,
+	[ColegioId] [int] NULL,
+	[EsActivo] [bit] NULL,
+	CONSTRAINT [PK_usuario] PRIMARY KEY CLUSTERED 
+	(
+		[UsuarioId]
+	)
+)
+GO
+

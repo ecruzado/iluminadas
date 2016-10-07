@@ -294,3 +294,79 @@ where t.NombreTabla = @nombreTabla
 end
 
 go
+
+
+-- =============================================
+-- Author:		Edgar Cruzado
+-- Create date: 27-07-2014
+-- Description:	listar prueba por clase
+-- =============================================
+CREATE PROCEDURE dbo.[sp_usuario_getByid]
+	@usuario_id int
+AS
+BEGIN
+
+SELECT [UsuarioId],[Usuario],[Nombres],[Apematerno]
+  ,[Apepaterno],[Pass],[Correo],[ColegioId]
+  ,[EsActivo],(select c.ColegioNombre from colegio c where c.colegioid = u.colegioid) colegio
+FROM  [Usuario] u
+where u.UsuarioId = @usuario_id
+
+END
+
+GO
+
+-- =============================================
+-- Author:		Edgar Cruzado
+-- Create date: 13-07-2014
+-- Description:	Lista usuario por colegio
+-- =============================================
+create PROCEDURE dbo.[sp_usuario_lstByColegio]
+	@ColegioId as int
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+SELECT     [UsuarioId]
+      ,tb1.[Usuario]
+      ,tb1.[Nombres]
+      ,tb1.[Apematerno]
+      ,tb1.[Apepaterno]
+      ,tb1.[Correo]
+	  ,tb1.ColegioId
+      ,tb2.[ColegioNombre] colegio
+      ,tb1.[EsActivo]
+FROM  [Usuario] as tb1
+inner join Colegio as tb2 on tb1.ColegioId=tb2.ColegioId
+where tb1.ColegioId=@ColegioId  
+END
+
+
+GO
+
+
+-- =============================================
+-- Author:		Edgar Cruzado
+-- Create date: 27-07-2014
+-- Description:	listar prueba por clase
+-- =============================================
+CREATE PROCEDURE dbo.[sp_usuario_lstByUsuarioAndPass]
+	@usuario as nvarchar(50),
+	@pass as nvarchar(50)
+AS
+BEGIN
+
+SELECT [UsuarioId],[Usuario],[Nombres],[Apematerno]
+  ,[Apepaterno],[Pass],[Correo],[ColegioId]
+  ,[EsActivo],(select c.ColegioNombre from colegio c where c.colegioid = u.colegioid) colegio FROM  Usuario u
+where usuario =@usuario and PWDCOMPARE(@pass, pass)=1 and [EsActivo]=1
+
+END
+
+
+GO
+
+
+
+GO
+
