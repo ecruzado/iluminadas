@@ -23,6 +23,12 @@
         </div>
     </div>
     <div class="form-group form-group-sm">
+        <label for="area" class="col-xs-1 control-label">Nombre *</label>
+        <div class="col-xs-11">
+            @Html.TextBoxFor(model => model.Clase.Nombre, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group form-group-sm">
         <label for="exampleInputPassword1" class="col-xs-1 control-label">Area</label>
         <div class="col-xs-3">
             @Html.DropDownListFor(model => model.Clase.AreaId, Model.Areas.Select(x => new SelectListItem { Text = x.Valor, Value = x.Codigo.ToString() }), "--Seleccionar--", new {@class = "form-control" })
@@ -120,6 +126,7 @@
                 <th>Id</th>
                 <th>Colegio</th>
                 <th>Profesor</th>
+                <th>Nombre</th>
                 <th>Area</th>
                 <th>Nivel</th>
                 <th>Grado</th>
@@ -233,6 +240,7 @@
                         "<td>" + value.ClaseId + "</td>" +
                         "<td>" + value.Colegio + "</td>" +
                         "<td>" + value.Profesor + "</td>" +
+                        "<td>" + value.Nombre + "</td>" +
                         "<td>" + value.Area + "</td>" +
                         "<td>" + value.Nivel + "</td>" +
                         "<td>" + value.Grado + "</td>" +

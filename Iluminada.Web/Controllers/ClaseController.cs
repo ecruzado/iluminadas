@@ -40,7 +40,7 @@ namespace Iluminada.Web.Controllers
             {
                 clase.UsuarioCreacion = "Usuario1";
                 clase.FechaCreacion = DateTime.Now;
-                clase.Archivo = GuardarArchivo();
+                clase.Archivo = GuardarArchivo(clase);
 
                 if (clase.ClaseId == 0)
                 {
@@ -130,7 +130,7 @@ namespace Iluminada.Web.Controllers
                 JsonRequestBehavior.AllowGet);
         }
 
-        private string GuardarArchivo() 
+        private string GuardarArchivo(Clase clase) 
         {
             if (Request.Files.Count > 0)
             {
@@ -144,7 +144,7 @@ namespace Iluminada.Web.Controllers
                     return fileName;
                 }
             }
-            return "";
+            return clase.Archivo;
         }
     }
 }

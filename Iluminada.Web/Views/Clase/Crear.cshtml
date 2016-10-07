@@ -117,6 +117,7 @@
         @if (!String.IsNullOrEmpty(Model.Clase.Archivo))
         {
             <a href="~/Archivos/@Model.Clase.Archivo" target="_blank">@Model.Clase.Archivo</a>
+            @Html.HiddenFor(model => model.Clase.Archivo)
         }
         <input id="file" type="file" name="file" style="display:inline-block" />
         <button id="btnEliminarArchivo" type="button" class="btn btn-default" style="display:inline-block">
