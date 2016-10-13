@@ -368,5 +368,15 @@ GO
 
 
 
+CREATE PROCEDURE dbo.sp_clase_lista_profesor
+AS
+BEGIN
+
+SELECT distinct Profesor from [dbo].[Clase]
+
+END
+
+
+
 GO
 

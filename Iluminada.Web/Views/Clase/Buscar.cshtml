@@ -1,4 +1,5 @@
 ﻿@model Iluminada.Web.Models.ClaseViewModel
+@using Iluminada.Web.Code
 @{
     ViewBag.Title = "Crear";
 }
@@ -23,7 +24,7 @@
         </div>
     </div>
     <div class="form-group form-group-sm">
-        <label for="area" class="col-xs-1 control-label">Nombre *</label>
+        <label for="area" class="col-xs-1 control-label">Nombre</label>
         <div class="col-xs-11">
             @Html.TextBoxFor(model => model.Clase.Nombre, new { @class = "form-control" })
         </div>
@@ -220,6 +221,37 @@
                                    .text(value.Valor));
                 });
             });
+        });
+
+        var substringMatcher = function (strs) {
+            return function findMatches(q, cb) {
+                var matches, substringRegex;
+
+                // an array that will be populated with substring matches
+                matches = [];
+
+                // regex used to determine if a string contains the substring `q`
+                substrRegex = new RegExp(q, 'i');
+
+                // iterate through the pool of strings and for any string that
+                // contains the substring `q`, add it to the `matches` array
+                $.each(strs, function (i, str) {
+                    if (substrRegex.test(str)) {
+                        matches.push(str);
+                    }
+                });
+
+                cb(matches);
+            };
+        };
+
+        var profesores = @Html.ToJson(Model.Profesores);
+
+        $('#Clase_Profesor').typeahead(null,
+        {
+            name: 'states',
+            limit: 10,
+            source: substringMatcher(profesores)
         });
 
         $("#btnLimpiar").click(function (event) {

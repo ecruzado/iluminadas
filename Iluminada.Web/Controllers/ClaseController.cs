@@ -30,6 +30,7 @@ namespace Iluminada.Web.Controllers
             entidad.Temas = new List<Tabla>();
             entidad.VirtudesGeneral = TablaLogica.Instancia.ListPorReferencia(Constantes.TABLA_VIRTUDGENERAL);
             entidad.VirtudesEspecifica = new List<Tabla>();
+            entidad.Profesores = ClaseLogica.Instancia.ListaProfesores();
             return View(entidad);
         }
 
@@ -76,6 +77,7 @@ namespace Iluminada.Web.Controllers
             entidad.Temas = TablaLogica.Instancia.ListPorReferencia(Constantes.TABLA_TEMALV, clase.TituloId);
             entidad.VirtudesGeneral = TablaLogica.Instancia.ListPorReferencia(Constantes.TABLA_VIRTUDGENERAL);
             entidad.VirtudesEspecifica = TablaLogica.Instancia.ListPorReferencia(Constantes.TABLA_VIRTUDESPECIFICA, clase.VirtudGeneralId);
+            entidad.Profesores = ClaseLogica.Instancia.ListaProfesores();
 
             return View("Crear", entidad);
         }
@@ -96,6 +98,7 @@ namespace Iluminada.Web.Controllers
             entidad.Temas = new List<Tabla>();
             entidad.VirtudesGeneral = TablaLogica.Instancia.ListPorReferencia(Constantes.TABLA_VIRTUDGENERAL);
             entidad.VirtudesEspecifica = new List<Tabla>();
+            entidad.Profesores = ClaseLogica.Instancia.ListaProfesores();
             return View(entidad);
         }
 

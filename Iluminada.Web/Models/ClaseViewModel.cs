@@ -21,5 +21,7 @@ namespace Iluminada.Web.Models
         public List<Tabla> Temas { get; set; }
         public List<Tabla> VirtudesGeneral { get; set; }
         public List<Tabla> VirtudesEspecifica { get; set; }
+
+        public List<string> Profesores { get; set; }
     }
 }

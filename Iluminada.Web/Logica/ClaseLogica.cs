@@ -31,5 +31,10 @@ namespace Iluminada.Web.Logica
         {
             return claseData.Actualizar(clase);
         }
+
+        public List<string> ListaProfesores() 
+        {
+            return claseData.ListaProfesores();
+        }
     }
 }

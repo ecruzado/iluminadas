@@ -274,5 +274,45 @@ namespace Iluminada.Web.Data
             }
         }
 
+
+
+        public List<string> ListaProfesores()
+        {
+
+            string spName = "sp_clase_lista_profesor";
+            var lista = new List<string>();
+
+            using (SqlConnection conn = new SqlConnection(CadenaConexion))
+            {
+                try
+                {
+                    using (SqlCommand command = new SqlCommand(spName, conn))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        conn.Open();
+
+                        IDataReader dr = command.ExecuteReader();
+
+                        while (dr.Read())
+                        {
+                            lista.Add(dr.GetString(dr.GetOrdinal("Profesor")));
+                        }
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    conn.Close();
+                }
+
+            }
+            return lista;
+
+        }
+
     }
 }
